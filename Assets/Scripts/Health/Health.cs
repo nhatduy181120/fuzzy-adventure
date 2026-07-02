@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -38,7 +39,16 @@ public class Health : MonoBehaviour
             if(!dead)
             {
                 anim.SetTrigger("Die");
-                GetComponent<PlayerMovement>().enabled = false;
+
+                if(GetComponent<PlayerMovement>() != null)
+                    GetComponent<PlayerMovement>().enabled = false;
+
+                if(GetComponentInParent<EnemyPatrol>() != null)
+                    GetComponentInParent<EnemyPatrol>().enabled = false;
+
+                if(GetComponent<MeleeAttack>() != null)
+                    GetComponent<MeleeAttack>().enabled = false;
+
                 dead = true;
             }
         }
